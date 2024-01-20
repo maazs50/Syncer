@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Syncer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id">137887945322-t0p44mglqnq8535o0ojj7g4db2r7530a.apps.googleusercontent.com</string>
+
 </resources>
