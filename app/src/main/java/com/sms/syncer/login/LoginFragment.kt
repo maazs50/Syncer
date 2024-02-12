@@ -1,11 +1,16 @@
 package com.sms.syncer.login
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -28,6 +33,8 @@ class LoginFragment : Fragment() {
     private lateinit var viewModel: AuthViewModel
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var loginBtn: SignInButton
+    private val READ_SMS_PERMISSION_REQUEST_CODE = 123
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +48,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+        checkSmsPermission()
 // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -49,7 +57,6 @@ class LoginFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(),gso)
         googleSignInClient.revokeAccess()
-
         loginBtn.setOnClickListener{
             signInWithGoogle()
         }
@@ -82,6 +89,40 @@ class LoginFragment : Fragment() {
                 // You may want to display an error message to the user
             }
         }
+    }
+    fun checkSmsPermission(){
+
+// Check if permission is granted
+        if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.READ_SMS
+            ) == PackageManager.PERMISSION_GRANTED) {
+            // Permission already granted, perform your SMS reading logic here
+            readSms()
+        } else {
+            // Permission not granted, request it
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_SMS), READ_SMS_PERMISSION_REQUEST_CODE)
+        }
+
+        // Handle the result of the permission request
+
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when (requestCode) {
+            READ_SMS_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted, perform your SMS reading logic here
+                    readSms()
+                } else {
+                    // Permission denied, handle accordingly (e.g., show a message or take alternative action)
+                    ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_SMS), READ_SMS_PERMISSION_REQUEST_CODE)
+                }
+            }
+            // Handle other permission request codes if needed
+        }
+    }
+
+    fun readSms(){
+        Toast.makeText(this.context, "Permission Granted", Toast.LENGTH_SHORT).show()
     }
 
     companion object{

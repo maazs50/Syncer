@@ -14,6 +14,51 @@
       },
       "oauth_client": [
         {
+          "client_id": "137887945322-7m65vj1ri4f9omv4l5kh2iscprj75lm0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sms.syncer",
+            "certificate_hash": "21274a68212273edb4c52220e1387f6c476aa40a"
+          }
+        },
+        {
+          "client_id": "137887945322-t0p44mglqnq8535o0ojj7g4db2r7530a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFNLa9X-UCDOnK4K2QfSvQP-AKkBNrWDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137887945322-t0p44mglqnq8535o0ojj7g4db2r7530a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137887945322:android:907db5d1441b1fb5d17013",
+        "android_client_info": {
+          "package_name": "com.sms.syncer1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137887945322-t9e9nb6260re8pkdu509lef1vfkll7n9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sms.syncer1",
+            "certificate_hash": "21274a68212273edb4c52220e1387f6c476aa40a"
+          }
+        },
+        {
           "client_id": "137887945322-t0p44mglqnq8535o0ojj7g4db2r7530a.apps.googleusercontent.com",
           "client_type": 3
         }
